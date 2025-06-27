@@ -14,7 +14,7 @@
 
 ## 🔐 Why CloudGuardian?
 
-CloudGuardian is a fully automated AWS security monitoring solution that detects suspicious activity (e.g., **root logins**) in real time, stores the data in DynamoDB, and sends alert notifications via SNS. Ideal for cloud engineers and DevOps professionals seeking hands-on AWS security and automation experience.
+CloudGuardian is a fully automated AWS security monitoring solution that detects suspicious activity (e.g., **root logins**) in real time, stores the data in DynamoDB, and sends alert notifications via SNS
 
 ---
 
@@ -25,8 +25,6 @@ CloudGuardian is a fully automated AWS security monitoring solution that detects
 - ✅ **Serverless Lambda functions** for automation (Python)
 - ✅ **Persistent storage** of events in DynamoDB
 - ✅ **Fully infrastructure-as-code** using Terraform
-- ✅ **100% AWS Free Tier compatible**
-
 ---
 
 ## 🧱 Architecture Overview
