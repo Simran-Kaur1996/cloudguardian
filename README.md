@@ -31,4 +31,5 @@ CloudGuardian is a fully automated AWS security monitoring solution that detects
 
 ## 🧱 Architecture Overview
 
+![image](https://github.com/user-attachments/assets/d926b019-b659-46ec-9e64-621114ce79ff)
 
