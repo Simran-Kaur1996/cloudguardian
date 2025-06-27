@@ -5,7 +5,6 @@ A production-ready, serverless security solution that detects, stores, and visua
 ![Frontend](https://img.shields.io/badge/frontend-React-lightblue?logo=react)
 ![Infrastructure](https://img.shields.io/badge/infrastructure-Terraform-blueviolet?logo=terraform)
 ![Deployment](https://img.shields.io/badge/deployment-CircleCI%20%7C%20S3%20%2B%20API%20Gateway-green?logo=circleci)
-
 ![AWS Lambda](https://img.shields.io/badge/AWS%20Service-Lambda-orange?logo=aws-lambda)
 ![AWS CloudTrail](https://img.shields.io/badge/AWS%20Service-CloudTrail-green?logo=amazon-aws)
 ![AWS EventBridge](https://img.shields.io/badge/AWS%20Service-EventBridge-purple?logo=amazon-aws)
@@ -17,14 +16,14 @@ A production-ready, serverless security solution that detects, stores, and visua
 
 ## 🚀 Key Features
 
-✅ Real-time threat detection using AWS CloudTrail and EventBridge (e.g., root logins, EC2 stops, IAM changes)
-✅ Serverless processing with AWS Lambda (Python) for event handling and threat classification
-✅ Persistent storage of alerts in DynamoDB with structured records (timestamp, user, severity, message)
-✅ Immediate alert notifications via Amazon SNS (email/SMS)
-✅ RESTful API using Amazon API Gateway to securely fetch threat alerts from DynamoDB
-✅ Frontend Dashboard built with React + Material UI for real-time alert visualization
-✅ End-to-end automation using Infrastructure as Code (Terraform)
-✅ CI/CD Pipeline with CircleCI to automate Lambda/API/frontend deployments
+✅ **Real-time threat detection** using AWS CloudTrail + EventBridge (e.g., root logins, EC2 stops, IAM changes)  
+✅ **Event-driven Lambda (Python)** for serverless threat processing & classification  
+✅ **Secure alert storage** in DynamoDB (timestamp, severity, user, event type)  
+✅ **Instant alerts** via Amazon SNS (Email/SMS notifications)  
+✅ **REST API** built with Amazon API Gateway for secure alert retrieval  
+✅ **Frontend Dashboard** with React + Material UI for live threat monitoring  
+✅ **Infrastructure as Code (IaC)** with Terraform for fully automated deployment  
+✅ **CI/CD pipeline** using CircleCI to auto-deploy Lambda, API, and Frontend  
 ---
 
 ## 🧱 Architecture Overview
