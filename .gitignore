@@ -1,0 +1,16 @@
+# Terraform state
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+
+# Lambda zips
+*.zip
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Credentials
+*.pem
+.env
