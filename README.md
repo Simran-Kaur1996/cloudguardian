@@ -32,10 +32,9 @@ CloudGuardian is a fully automated AWS security monitoring solution that detects
 ## 🧱 Architecture Overview
 
 ```
-CloudTrail → EventBridge → detect_threat.py Lambda
-              │
-              ├──▶ DynamoDB (stores alerts)
-              └──▶ SNS Topic → Email Notification
+## 🧭 Visual Architecture Diagram
+
+![CloudGuardian Architecture](architecture/cloudguardian_architecture.png)
 ```
 
 ---
