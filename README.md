@@ -29,5 +29,6 @@ A production-ready, serverless security solution that detects, stores, and visua
 
 ## 🧱 Architecture Overview
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/d926b019-b659-46ec-9e64-621114ce79ff" width="600"/>
+  <img src="https://github.com/user-attachments/assets/a79bcbaa-f9ea-4f76-815a-f5b1de0faf61" width="600"/>
 </p>
+
