@@ -125,7 +125,7 @@ resource "aws_iam_role" "lambda_exec_role" {
 }
 
 # ----------------------------
-# IAM Policy
+# IAM Policy for Lambda
 # ----------------------------
 resource "aws_iam_policy" "lambda_policy" {
   name = "cloudguardian_lambda_policy"
@@ -137,6 +137,7 @@ resource "aws_iam_policy" "lambda_policy" {
         Effect = "Allow",
         Action = [
           "dynamodb:PutItem",
+          "dynamodb:Scan",
           "sns:Publish"
         ],
         Resource = "*"
@@ -160,7 +161,7 @@ resource "aws_iam_role_policy_attachment" "lambda_policy_attach" {
 }
 
 # ----------------------------
-# 🧠 Lambda Function: detect_threat
+# 🧠 Lambda Function: detect_threat.py
 # ----------------------------
 resource "aws_lambda_function" "detect_threat" {
   function_name = "cloudguardian_detect_threat"
@@ -168,8 +169,8 @@ resource "aws_lambda_function" "detect_threat" {
   runtime       = "python3.12"
   role          = aws_iam_role.lambda_exec_role.arn
 
-  filename         = "${path.module}/../backend/lambda/detect_threat.zip"
-  source_code_hash = filebase64sha256("${path.module}/../backend/lambda/detect_threat.zip")
+  filename         = "${path.module}/../backend/lambda/alerts.zip"
+  source_code_hash = filebase64sha256("${path.module}/../backend/lambda/alerts.zip")
   timeout          = 10
 
   environment {
@@ -190,7 +191,7 @@ resource "aws_cloudwatch_event_target" "send_to_lambda" {
 }
 
 # ----------------------------
-# ✅ Lambda Permission
+# ✅ Lambda Permission (EventBridge → Lambda)
 # ----------------------------
 resource "aws_lambda_permission" "allow_eventbridge" {
   statement_id  = "AllowExecutionFromEventBridge"
@@ -198,21 +199,4 @@ resource "aws_lambda_permission" "allow_eventbridge" {
   function_name = aws_lambda_function.detect_threat.function_name
   principal     = "events.amazonaws.com"
   source_arn    = aws_cloudwatch_event_rule.suspicious_activity.arn
-}
-
-# ----------------------------
-# ✅ Alert-only Lambda (SNS testing)
-# ----------------------------
-resource "aws_lambda_function" "cloudguardian_lambda" {
-  function_name = "cloudguardian_alert_handler"
-  role          = aws_iam_role.lambda_exec_role.arn
-  runtime       = "python3.12"
-  handler       = "alerts.lambda_handler"
-  filename      = "${path.module}/../backend/lambda/alerts.zip"
-
-  environment {
-    variables = {
-      SNS_TOPIC_ARN = aws_sns_topic.alert_topic.arn
-    }
-  }
 }

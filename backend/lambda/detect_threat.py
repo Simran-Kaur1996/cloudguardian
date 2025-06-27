@@ -15,7 +15,20 @@ SNS_TOPIC_ARN = os.environ['SNS_TOPIC_ARN']
 def lambda_handler(event, context):
     print("Received event:", json.dumps(event, indent=2))
 
-    # Detect root login activity
+    # ✅ If triggered via API Gateway (frontend fetch)
+    if event.get("httpMethod") == "GET":
+        table = dynamodb.Table(TABLE_NAME)
+        response = table.scan(Limit=10)
+        return {
+            "statusCode": 200,
+            "headers": {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            },
+            "body": json.dumps(response.get("Items", []))
+        }
+
+    # ✅ If triggered via EventBridge (CloudTrail event)
     user_type = event.get("detail", {}).get("userIdentity", {}).get("type", "")
     if user_type == "Root":
         alert_id = str(uuid.uuid4())
@@ -30,19 +43,26 @@ def lambda_handler(event, context):
             "event_type": "RootLogin"
         }
 
-        # Put item in DynamoDB
+        # Store in DynamoDB
         table = dynamodb.Table(TABLE_NAME)
         table.put_item(Item=item)
 
         # Send SNS alert
         message = f"🚨 CloudGuardian Alert: Root Login Detected\n\n{json.dumps(item, indent=2)}"
-        sns.publish(
+        response = sns.publish(
             TopicArn=SNS_TOPIC_ARN,
             Subject="🚨 CloudGuardian Alert: Root Login",
             Message=message
         )
+
+        return {
+            'statusCode': 200,
+            'body': 'Root login alert processed and SNS notification sent',
+            'messageId': response['MessageId']
+        }
+
+    # If no root login or API call
     return {
         'statusCode': 200,
-        'body': 'SNS alert sent',
-        'messageId': response['MessageId']
+        'body': 'No root login detected or unsupported trigger source'
     }

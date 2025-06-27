@@ -1,0 +1,36 @@
+version: 2.1
+
+executors:
+  terraform-executor:
+    docker:
+      - image: hashicorp/terraform:1.6.6
+    working_directory: ~/project
+
+jobs:
+  deploy:
+    executor: terraform-executor
+    steps:
+      - checkout
+
+      - run:
+          name: Install AWS CLI
+          command: |
+            apk add --no-cache python3 py3-pip curl unzip
+            pip3 install awscli
+
+      - run:
+          name: Terraform Init
+          command: terraform init
+
+      - run:
+          name: Terraform Plan
+          command: terraform plan
+
+      - run:
+          name: Terraform Apply
+          command: terraform apply -auto-approve
+
+workflows:
+  deploy-on-push:
+    jobs:
+      - deploy
