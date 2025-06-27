@@ -10,14 +10,6 @@
 ![AWS DynamoDB](https://img.shields.io/badge/AWS%20Service-DynamoDB-blue?logo=amazon-dynamodb)
 ![AWS SNS](https://img.shields.io/badge/AWS%20Service-SNS-yellow?logo=amazon-aws)
 
----
-
-## 🔐 Why CloudGuardian?
-
-CloudGuardian is a fully automated AWS security monitoring solution that detects suspicious activity (e.g., **root logins**) in real time, stores the data in DynamoDB, and sends alert notifications via SNS
-
----
-
 ## 🚀 Key Features
 
 - ✅ **Real-time root login detection** via AWS CloudTrail + EventBridge
