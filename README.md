@@ -31,29 +31,4 @@ CloudGuardian is a fully automated AWS security monitoring solution that detects
 
 ## 🧱 Architecture Overview
 
-```
-## 🧭 Visual Architecture Diagram
-
-![CloudGuardian Architecture](architecture/cloudguardian_architecture.png)
-```
-
----
-
-## 📁 Project Structure
-
-```
-cloudguardian/
-├── backend/
-│   └── lambda/
-│       ├── alerts.py         # Test Lambda to send SNS alerts manually
-│       └── detect_threat.py  # Main Lambda to detect & report root logins
-├── terraform/
-│   ├── main.tf               # Terraform infrastructure setup
-│   ├── variables.tf          # AWS region + inputs
-│   └── outputs.tf            # Outputs for resources
-├── .gitignore
-└── README.md
-```
-
----
 
